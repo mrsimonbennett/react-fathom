@@ -14,6 +14,7 @@ class BulkLogger
     private array $buffer = [];
     private ?TimerInterface $timer = null;
     private int $maxTimeoutDelay = 1;
+    private int $maxBufferSize = 5000;
 
     /**
      * @param ProxyBrowser $browser
@@ -44,7 +45,7 @@ class BulkLogger
 
     public function ensureTimer() : void
     {
-        if(count($this->buffer) > 10000){
+        if(count($this->buffer) > $this->maxBufferSize){
             $this->sentBulk();
             return;
         }

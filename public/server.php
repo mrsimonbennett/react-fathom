@@ -25,6 +25,17 @@ $proxyBrowser = new \Fathom\ProxyBrowser($loop);
 
 $logger = new \Fathom\Logging\BulkLogger($proxyBrowser, $loop);
 
+$loop->addPeriodicTimer(5,function ()
+{
+    echo number_format(
+            memory_get_usage() / 1024 / 1024,
+            2
+        ). '/' . number_format(
+            memory_get_peak_usage() / 1024 / 1024,
+            2
+        ) . 'M' . PHP_EOL;
+});
+
 $http = new HttpServer(
     $loop,
     new StreamingRequestMiddleware(),
@@ -33,13 +44,6 @@ $http = new HttpServer(
 
         $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getUri()->getPath());
 
-        echo $request->getMethod() . ' ' . $request->getUri()->getPath() . ' ' . number_format(
-                memory_get_usage() / 1024 / 1024,
-                2
-            ). '/' . number_format(
-                memory_get_peak_usage() / 1024 / 1024,
-                2
-            ) . 'M' . PHP_EOL;
 
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:

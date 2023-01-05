@@ -45,8 +45,6 @@ class ProxyBrowser
                       });
          */
         //Cant send so delay by 1 second
-        echo 'Sending Logs: ' . count($data) . PHP_EOL;
-        usleep(1000);
-        echo 'Send Logs' . PHP_EOL;
+        usleep(100);
     }
 }
