@@ -45,6 +45,6 @@ class ProxyBrowser
                       });
          */
         //Cant send so delay by 1 second
-        usleep(100);
+        //usleep(100);
     }
 }

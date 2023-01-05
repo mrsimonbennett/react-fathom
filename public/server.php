@@ -25,21 +25,26 @@ $proxyBrowser = new \Fathom\ProxyBrowser($loop);
 
 $logger = new \Fathom\Logging\BulkLogger($proxyBrowser, $loop);
 
-$loop->addPeriodicTimer(5,function ()
-{
-    echo number_format(
+$requestCount = 0;
+$loop->addPeriodicTimer($time = 1,function () use (&$requestCount,$time) {
+    system('clear');
+    echo "Bitching Servers by Bennett" . PHP_EOL;
+    echo "Requests/sec: " . str_pad((string)round($requestCount/$time),6," ",STR_PAD_LEFT)  .  "\t" . number_format(
             memory_get_usage() / 1024 / 1024,
             2
         ). '/' . number_format(
             memory_get_peak_usage() / 1024 / 1024,
             2
         ) . 'M' . PHP_EOL;
+    $requestCount = 0;
+
 });
 
 $http = new HttpServer(
     $loop,
     new StreamingRequestMiddleware(),
-    function (ServerRequestInterface $request) use ($dispatcher, $proxyBrowser, $logger) {
+    function (ServerRequestInterface $request) use ($dispatcher, $proxyBrowser, $logger, &$requestCount) {
+        $requestCount++;
         $body = $request->getBody();
 
         $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getUri()->getPath());
