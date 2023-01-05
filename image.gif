@@ -1,0 +1,20 @@
+HTTP/2 200 
+date: Thu, 05 Jan 2023 06:22:55 GMT
+content-type: text/plain; charset=utf-8, image/gif
+content-length: 43
+server: BunnyCDN-UK1-886
+cdn-pullzone: 611028
+cdn-uid: aa90c48b-f401-4fa1-aac1-c94c8f3ae560
+cdn-requestcountrycode: GB
+cache-control: public, max-age=0
+pragma: no-cache
+tk: N
+cdn-proxyver: 1.03
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 200
+cdn-cachedat: 01/05/2023 06:22:55
+cdn-edgestorageid: 886
+cdn-status: 200
+cdn-requestid: d18c85ad2b67163a6a4aa3ecd92daee4
+cdn-cache: MISS
+
